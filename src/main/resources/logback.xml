@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="HOME_LOG" value="logs/leader.log"/>
+    <property name="HOME_LOG_W" value="logs/worker.log"/>
+    <property name="HOME_LOG_P" value="logs/project.log"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${HOME_LOG}</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE1" class="ch.qos.logback.core.FileAppender">
+        <file>${HOME_LOG_W}</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE2" class="ch.qos.logback.core.FileAppender">
+        <file>${HOME_LOG_P}</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+        </encoder>
+    </appender>
+    <!-- Log Level: ERROR, WARN, INFO, DEBUG, TRACE-->
+    <logger name="Registration_Discovery.Leader" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="Registration_Discovery.Worker" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE1"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="Registration_Discovery" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE2"/>
+    </logger>
+    <root level="error">
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
