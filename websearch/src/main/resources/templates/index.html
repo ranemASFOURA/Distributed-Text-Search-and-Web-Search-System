@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Search</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Web Search</h1>
+
+    <!-- Form for submitting search queries -->
+    <form action="/search" method="post">
+        <input type="text" name="query" placeholder="Enter your search query" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Displaying results -->
+    <div class="results" th:if="${results != null}">
+        <h2>Search results for: <span th:text="${query}"></span></h2>
+        <ul>
+            <!-- If results exist, display them -->
+            <th:block th:each="result : ${results}">
+                <li>
+                    <strong>Key:</strong> <span th:text="${result.key}"></span>,
+                    <strong>Value:</strong> <span th:text="${result.value}"></span>
+                </li>
+            </th:block>
+
+            <!-- If no results found -->
+            <th:block th:if="${#lists.isEmpty(results)}">
+                <li>No results found.</li>
+            </th:block>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
